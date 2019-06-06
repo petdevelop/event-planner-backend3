@@ -2,12 +2,15 @@ const mongoose = require('mongoose');
 
 const User = require('./user');
 const Event = require('./event');
+const Item = require('./item');
 
 const connectDb = () => {
-  return mongoose.connect('mongodb+srv://parronte:abc123-%2B@cluster0-liyg5.mongodb.net/event_planner?retryWrites=true&w=majority', { useNewUrlParser: true });
+  const productionURl = 'mongodb+srv://parronte:abc123-%2B@cluster0-liyg5.mongodb.net/event_planner?retryWrites=true&w=majority';
+  const developmentUrl = 'mongodb://localhost:27017/event_planner';
+  return mongoose.connect(developmentUrl, { useNewUrlParser: true });
 };
 
-const models = { User, Event };
+const models = { User, Event, Item };
 
 const createUsers = async () => {
     const user1 = new models.User({
@@ -42,9 +45,20 @@ const createUsers = async () => {
     await user1.save();
   };
 
+  const createItems = async () => {
+    const item = new models.Item({
+      name: 'item1',
+      description: 'item desc',
+      url: 'kajsdfj/asdf/asdf/as'
+    });
+  
+    await item.save();
+  };
+
 module.exports = {
     connectDb,
     models,
     createUsers,
-    createEventsWithUser
+    createEventsWithUser,
+    createItems
 };
