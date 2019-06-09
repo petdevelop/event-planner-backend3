@@ -99,7 +99,7 @@ fromModels.connectDb().then(async() => {
       fromModels.models.Event.deleteMany({}),
     ]);
 
-    fromModels.createUsers();
+    // fromModels.createUsers();
     fromModels.createEventsWithUser();
     fromModels.createItems();
   }

@@ -4,10 +4,12 @@ const User = require('./user');
 const Event = require('./event');
 const Item = require('./item');
 
+mongoose.set('useFindAndModify', false);
+
 const connectDb = () => {
   const productionURl = 'mongodb+srv://parronte:abc123-%2B@cluster0-liyg5.mongodb.net/event_planner?retryWrites=true&w=majority';
   const developmentUrl = 'mongodb://localhost:27017/event_planner';
-  return mongoose.connect(developmentUrl, { useNewUrlParser: true });
+  return mongoose.connect(productionURl, { useNewUrlParser: true });
 };
 
 const models = { User, Event, Item };

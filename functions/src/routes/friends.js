@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Friend = require('../models/friend');
+const ObjectId = require('mongoose').Types.ObjectId;
 
-/* GET friends listing. */
-router.get('/', (req, res, next) => {
-  Friend.find((err, list) => {
+router.get('/:userId', (req, res, next) => {
+  const userId = req.params.userId;
+
+  Friend.find({ userId: userId }, (err, list) => {
     if (err) return next(err);
     res.json(list);
   });
 });
 
-router.post('/list', (req, res, next) => {
+router.post('/list', async (req, res, next) => {
     Friend.collection.insert(req.body, (err, docs) => {
-        if (err) { if (err) { next(err); };} 
+        if (err) { return next(err); };
         res.json(docs);
     });
 });
