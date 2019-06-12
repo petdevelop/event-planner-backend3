@@ -9,7 +9,7 @@ mongoose.set('useFindAndModify', false);
 const connectDb = () => {
   const productionUrl = 'mongodb+srv://parronte:abc123-%2B@cluster0-liyg5.mongodb.net/event_planner?retryWrites=true&w=majority';
   const developmentUrl = 'mongodb://localhost:27017/event_planner';
-  return mongoose.connect(productionUrl, { useNewUrlParser: true });
+  return mongoose.connect(developmentUrl, { useNewUrlParser: true });
 };
 
 const models = { User, Event, Item };

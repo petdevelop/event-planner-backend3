@@ -10,6 +10,9 @@ const friendSchema = new mongoose.Schema({
     userId: {
         type: String,
     },
+    picture: {
+        type: String,
+    }
 });
 
 const Friend = mongoose.model('Friend', friendSchema);

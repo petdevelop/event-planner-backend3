@@ -20,11 +20,24 @@ router.post('/list', async (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const friend = new Friend({...req.body});
-    friend.save((err, friend) => {
-      if (err) { next(err); };
-      res.json(friend);
-    });
+  const friend = new Friend({...req.body});
+  friend.save((err, friend) => {
+    if (err) { next(err); };
+    res.json(friend);
   });
+});
+
+router.post('/picture', (req, res, next) => {
+  const {id, picture} = req.body;
+
+  Friend.findOneAndUpdate(
+    {'id': id}, 
+    {'picture': picture}, 
+    { new: true }, 
+    (err, suc) => {
+      if (err) { return next(err); }
+      return res.json(suc);
+    });
+});
 
 module.exports = router;
